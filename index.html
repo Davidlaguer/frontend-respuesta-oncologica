@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Generador de Informe Oncológico - RECist 1.1</title>
+  <title>Generador de Informe Oncológico - RECIST 1.1</title>
   <style>
     body { font-family: 'Poppins', sans-serif; background: #f9fafc; margin: 40px; color: #333; }
     .header { background: #2C3E50; color: white; padding: 20px; text-align: center; border-radius: 8px; font-size: 22px; font-weight: bold; margin-bottom: 40px; text-transform: uppercase; }
@@ -69,10 +69,15 @@ async function generarInforme() {
   document.getElementById('loading').style.display = 'block';
 
   try {
-    const response = await fetch('/generar-informe', {
+    const response = await fetch('https://backend-respuesta-oncologica.onrender.com/generar-informe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ informePrevio: previo, informeActual: actual, fechaPrevio: fechaPrevio, fechaActual: fechaActual })
+      body: JSON.stringify({
+        informePrevio: previo,
+        informeActual: actual,
+        fechaPrevio: fechaPrevio,
+        fechaActual: fechaActual
+      })
     });
 
     const data = await response.json();
@@ -80,7 +85,7 @@ async function generarInforme() {
     if (data.error) throw new Error(data.error);
 
     const preview = document.getElementById('preview');
-    preview.innerHTML = `<h2 style="color:#2C3E50;">Informe Respuesta Generado</h2><p>${data.informe.replace(/\n/g, '<br>')}</p>`;
+    preview.innerHTML = `<h2 style="color:#2C3E50;">Informe Respuesta Generado</h2><p>${data.informeGenerado.replace(/\n/g, '<br>')}</p>`;
     preview.style.display = 'block';
     document.getElementById('loading').style.display = 'none';
 
