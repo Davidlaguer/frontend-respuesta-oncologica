@@ -85,7 +85,7 @@ async function generarInforme() {
     if (data.error) throw new Error(data.error);
 
     const preview = document.getElementById('preview');
-    preview.innerHTML = `<h2 style="color:#2C3E50;">Informe Respuesta Generado</h2><p>${data.informeGenerado.replace(/\n/g, '<br>')}</p>`;
+    preview.innerHTML = `<h2 style="color:#2C3E50;">Informe Respuesta Generado</h2><p>${data.informe.replace(/\n/g, '<br>')}</p>`;
     preview.style.display = 'block';
     document.getElementById('loading').style.display = 'none';
 
